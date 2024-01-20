@@ -1,9 +1,10 @@
-
-import ReactDOM from 'react-dom/client'
+import React from 'react';
+import ReactDOM from 'react-dom';
 import { restaurants } from './materials/mock'
 
+const root = ReactDOM.createRoot(document.getElementById('root'));
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+root.render(
   <>
     <div>
       <h2>{restaurants[0].name}</h2>
@@ -68,3 +69,76 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     </div>
   </>
 )
+
+// root.render(React.createElement("div", {
+//   children: React.createElement("div", {
+//     children: [
+//       React.createElement("div", {
+//         children: [
+//           React.createElement("h2", null, restaurants[0].name),
+//           React.createElement("h3", null, "Меню"),
+//           React.createElement("ul", null, [
+//             React.createElement("li", null, restaurants[0].menu[0].name),
+//             React.createElement("li", null, restaurants[0].menu[1].name),
+//             React.createElement("li", null, restaurants[0].menu[2].name)
+//           ]),
+//           React.createElement("h3", null, "Отзывы"),
+//           React.createElement("ul", null, [
+//             React.createElement("li", null, restaurants[0].reviews[0].text),
+//             React.createElement("li", null, restaurants[0].reviews[1].text)
+//           ]),
+//         ]
+//       }),
+
+//       React.createElement("div", {
+//         children: [
+//           React.createElement("h2", null, restaurants[1].name),
+//           React.createElement("h3", null, "Меню"),
+//           React.createElement("ul", null, [
+//             React.createElement("li", null, restaurants[1].menu[0].name),
+//             React.createElement("li", null, restaurants[1].menu[1].name)
+//           ]),
+//           React.createElement("h3", null, "Отзывы"),
+//           React.createElement("ul", null, [
+//             React.createElement("li", null, restaurants[1].reviews[0].text),
+//             React.createElement("li", null, restaurants[1].reviews[1].text),
+//             React.createElement("li", null, restaurants[1].reviews[2].text),
+//           ]),
+//         ]
+//       }),
+
+//       React.createElement("div", {
+//         children: [
+//           React.createElement("h2", null, restaurants[2].name),
+//           React.createElement("h3", null, "Меню"),
+//           React.createElement("ul", null, [
+//             React.createElement("li", null, restaurants[2].menu[0].name),
+//             React.createElement("li", null, restaurants[2].menu[1].name),
+//             React.createElement("li", null, restaurants[2].menu[2].name)
+//           ]),
+//           React.createElement("h3", null, "Отзывы"),
+//           React.createElement("ul", null, [
+//             React.createElement("li", null, restaurants[2].reviews[0].text),
+//           ]),
+//         ]
+//       }),
+
+//       React.createElement("div", {
+//         children: [
+//           React.createElement("h2", null, restaurants[3].name),
+//           React.createElement("h3", null, "Меню"),
+//           React.createElement("ul", null, [
+//             React.createElement("li", null, restaurants[3].menu[0].name),
+//             React.createElement("li", null, restaurants[3].menu[1].name)
+//           ]),
+//           React.createElement("h3", null, "Отзывы"),
+//           React.createElement("ul", null, [
+//             React.createElement("li", null, restaurants[3].reviews[0].text),
+//             React.createElement("li", null, restaurants[3].reviews[1].text),
+//           ]),
+//         ]
+//       }),
+//     ]
+//   })
+// }));
+
