@@ -4,7 +4,6 @@
 export const App = () => {
   return (
     <>
-    {/* <h1>hello app</h1> */}
      <Layout restaurants={restaurants}/> 
     </>
   )
