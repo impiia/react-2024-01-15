@@ -3,8 +3,6 @@
 
 export const App = () => {
   return (
-    <>
      <Layout restaurants={restaurants}/> 
-    </>
   )
 }
