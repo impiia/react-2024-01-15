@@ -1,10 +1,16 @@
-import style from './styles.module.scss';
+import { MenuItem } from "./menuItem/component";
 
-export const MenuItem = ({ name }) => {
+export const Menu = ({ menu }) => {
     return (
-        
-            <li className={style.root}>
-                {name}
-            </li>
-    )
-}
+        <>
+            <h3>Меню</h3>
+            <ul>
+                {menu.map((menuItem) => (
+                    <li> 
+                    <MenuItem name={menuItem.name} />
+                    </li>
+                ))}
+            </ul>
+        </>
+    );
+};
