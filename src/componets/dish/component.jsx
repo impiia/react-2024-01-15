@@ -1,6 +1,6 @@
 import style from './styles.module.scss';
 
-export const MenuItem = ( {name} ) => {
+export const Dish = ( {name} ) => {
     return (
         
             <div className={style.root}>

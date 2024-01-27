@@ -1,6 +1,6 @@
 import style from './styles.module.scss';
 
-export const ReviewItem = ({ text }) => {
+export const Review = ({ text }) => {
     return (
             <div className={style.root}>
                 {text}

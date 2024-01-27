@@ -1,15 +1,15 @@
-import { Menu } from './menu/component';
-import { Reviews } from './reviews/component';
+import { Menu } from '../menu/component';
+import { Reviews } from '../reviews/component';
 
 import style from './styles.module.scss';
 
-export const Restaurant = ({ name, menu, reviews }) => {
+export const Restaurant = ({ restaurant }) => {
     return (
         <div className={style.root}>
             <div className={style.restaurant}>
-                <h2>{name}</h2>
-                <Menu menu={ menu }/> 
-                <Reviews reviews = {reviews} /> 
+                <h2>{restaurant.name}</h2>
+                <Menu menu={ restaurant.menu }/> 
+                <Reviews reviews = { restaurant.reviews } /> 
             </div>
         </div>
     )
