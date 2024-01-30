@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button } from '../button/component';
+import { RestaurantButtonList } from '../restaurantButtonList/component';
 import { Restaurant } from '../restaurant/component';
 import style from './styles.module.scss';
 
@@ -12,12 +12,10 @@ export const Restaurants = ({ restaurants }) => {
 
     return (
         <div className={style.root}>
-            {restaurants.map((restaurant) => (
-                <Button className={style.pageLink} onClick={() => selectRestaurant(restaurant)}>
-                    {restaurant.name}
-                </Button>
-            ))}
-
+            <RestaurantButtonList
+                restaurants={restaurants}
+                onSelectRestaurant={selectRestaurant}
+            />
             {selectedRestaurant && <Restaurant restaurant={selectedRestaurant} />}
         </div>
     );
