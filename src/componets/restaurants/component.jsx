@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { RestaurantButtonList } from '../restaurantButtonList/component';
+import { RestaurantTabs } from '../restaurant-tabs/component';
 import { Restaurant } from '../restaurant/component';
 import style from './styles.module.scss';
 
@@ -12,7 +12,7 @@ export const Restaurants = ({ restaurants }) => {
 
     return (
         <div className={style.root}>
-            <RestaurantButtonList
+            <RestaurantTabs
                 restaurants={restaurants}
                 onSelectRestaurant={selectRestaurant}
             />
