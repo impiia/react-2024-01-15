@@ -1,11 +1,12 @@
 import { Button } from '../button/component';
-import style from './styles.module.scss';
+import styles from './styles.module.scss';
 
-export const RestaurantButtonList = ({ restaurants, onSelectRestaurant }) => {
+export const RestaurantTabs = ({ restaurants, onSelectRestaurant }) => {
+    
     return (
         <>
             {restaurants.map((restaurant) => (
-                <Button className={style.pageLink} 
+                <Button className={styles.pageLink} 
                     onClick={() => onSelectRestaurant(restaurant)}
                 >
                     {restaurant.name}
