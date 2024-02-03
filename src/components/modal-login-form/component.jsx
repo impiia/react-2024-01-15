@@ -68,7 +68,7 @@ export const Modal = ({ isOpen, onClose }) => {
             <input
               id="email"
               name="email"
-              type="text"
+              type="email"
               value={email}
               placeholder="e-mail"
               onChange={handleEmailChange} 

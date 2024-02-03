@@ -31,10 +31,9 @@ export const RewiewForm = () => {
 
     return (
         <form className={styles.root}>
-             <div className={styles.field}>
-                <label htmlFor="name">Имя</label>
+            <div className={styles.field}>
                 <span id="name">
-                    {userName}
+                    Имя: {userName}
                 </span>
             </div>
             <div className={styles.field}>
@@ -61,5 +60,6 @@ export const RewiewForm = () => {
                 />
             </div>
         </form>
+
     )
 }
