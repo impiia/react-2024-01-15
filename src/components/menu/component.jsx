@@ -5,9 +5,9 @@ export const Menu = ({ menu }) => {
         <>
             <h3>Меню</h3>
             <ul>
-                {menu.map((dish) => (
-                    <li> 
-                    <Dish dish={dish} />
+                {menu.map((dish, index) => (
+                    <li key={index}> 
+                        <Dish dish={dish} />
                     </li>
                 ))}
             </ul>

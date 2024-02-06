@@ -1,8 +1,14 @@
+.root {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 50px;
+  color: white;
+  background-color: rgb(48, 92, 92);
+  margin: 0 auto;
+  padding: 10px 10px;
+}
 
-  .root {
-    width: 100%;
-    color: rgb(183, 87, 103);
-    background-color: rgb(48, 92, 92);
-    margin: 0 auto;
-    padding: 10px 10px;
-  }
+.user {
+  display: flex;
+}
