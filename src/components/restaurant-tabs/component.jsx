@@ -1,18 +1,17 @@
-import { Button } from '../button/component';
-import styles from './styles.module.scss';
+import { Tab } from '../tab/component';
+import { useSelector } from 'react-redux';
+import { selectRestaurantIds } from '../../redux/entities/restaurant/selectors';
 
-export const RestaurantTabs = ({ restaurants, onSelectRestaurant }) => {
+export const RestaurantTabs = ({ onSelectRestaurant }) => {
+    const restaurantIds = useSelector(selectRestaurantIds);
+
     return (
         <>
-            {restaurants.map((restaurant) => (
-                <Button
-                    key={restaurant.id} // Добавлен ключ
-                    className={styles.pageLink}
-                    onClick={() => onSelectRestaurant(restaurant)}
-                >
-                    {restaurant.name}
-                </Button>
-            ))}
+            {restaurantIds.map((restaurantId) => {
+                return (
+                    <Tab key={restaurantId} id={restaurantId}  onClick={()=>onSelectRestaurant(restaurantId)}/>
+                );
+            })}
         </>
     );
 };

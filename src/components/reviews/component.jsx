@@ -1,9 +1,9 @@
 import { Review } from '../review/component'
-import { RewiewForm } from '../review-form/component';
+import { ReviewForm } from '../review-form/component';
 import { useContext } from 'react';
 import { UserContext } from '../../contexts/user';
 
-export const Reviews = ({ reviews }) => {
+export const Reviews = ({ reviewIds }) => {
     const { name, email } = useContext(UserContext);
     const isAuthenticated = name !== "" && email !== "";
 
@@ -11,13 +11,13 @@ export const Reviews = ({ reviews }) => {
         <>
             <h3>Отзывы</h3>
             <ul>
-                {reviews.map((review, index) => (
+                {reviewIds.map((reviewId, index) => (
                     <li key={index}>
-                        <Review text={review.text} />
+                        <Review reviewId={reviewId} />
                     </li>
                 ))}
             </ul>
-            {isAuthenticated && <RewiewForm />}
+            {isAuthenticated && <ReviewForm />}
         </>
     )
 }
