@@ -1,8 +1,15 @@
 import style from './styles.module.scss';
 import { Button } from '../button/component';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { selectDishById } from '../../redux/entities/dish/selectors';
 
-export const Dish = ({ dish }) => {
+export const Dish = ({ dishId }) => {
+    const dish = useSelector(state => selectDishById(state, dishId));
+    if (!dish) {
+        return <div>Данные о блюде не найдены</div>;
+    }
+
     const [count, setCount] = useState(0);
 
     const increment = () => {
