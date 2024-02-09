@@ -1,12 +1,12 @@
 import { Footer } from "../footer/component"
 import { Header } from "../header/component"
-import { Restaurants } from "../restaurants/component"
+import { RestaurantPage } from "../restaurant-page/component"
 
-export const Layout = ({ restaurants }) => {
+export const Layout = () => {
     return (
         <>
             <Header />
-            <Restaurants restaurants={restaurants}/>
+            <RestaurantPage />
             <Footer />
         </>
     )

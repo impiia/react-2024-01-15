@@ -1,13 +1,14 @@
+
 import { Dish } from "../dish/component";
 
-export const Menu = ({ menu }) => {
+export const Menu = ({ dishIds }) => {
     return (
         <>
             <h3>Меню</h3>
             <ul>
-                {menu.map((dish, index) => (
+                {dishIds.map((dishId, index) => (
                     <li key={index}> 
-                        <Dish dish={dish} />
+                        <Dish dishId={dishId} />
                     </li>
                 ))}
             </ul>

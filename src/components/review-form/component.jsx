@@ -13,7 +13,7 @@ function reducer(state, action) {
     }
 }
 
-export const RewiewForm = () => {
+export const ReviewForm = () => {
     const { name: userName } = useContext(UserContext);
     const [state, dispatch] = useReducer(reducer, {
         name: userName || "",

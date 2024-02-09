@@ -46,6 +46,8 @@ export const Modal = ({ isOpen, onClose }) => {
   }
 
   return createPortal(
+    <>
+    <div onClick={onClose} className={styles.overlay} />
     <div className={styles.root}>
       <form className={styles.modal}>
         <div className={styles.field}>
@@ -81,7 +83,8 @@ export const Modal = ({ isOpen, onClose }) => {
           <Button className={styles.button} onClick={handleOkClick}>Ок</Button>
         </div>
       </form>
-    </div>,
+    </div>
+    </>,
     document.body
   );
 };
