@@ -7,9 +7,9 @@ import { Modal } from '../modal-login-form/component';
 
 export const Header = () => {
     const { name, email, setUser } = useContext(UserContext);
-    const isAuthenticated = name !== "" && email !== "";
     const [isModalOpen, setIsModalOpen] = useState(false);
-
+    const isAuthenticated = name !== "" && email !== "";
+   
     const handleLoginClick = () => {
         setIsModalOpen(true);
     };

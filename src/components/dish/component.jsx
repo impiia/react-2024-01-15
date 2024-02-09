@@ -6,11 +6,11 @@ import { selectDishById } from '../../redux/entities/dish/selectors';
 
 export const Dish = ({ dishId }) => {
     const dish = useSelector(state => selectDishById(state, dishId));
+    const [count, setCount] = useState(0);
+
     if (!dish) {
         return <div>Данные о блюде не найдены</div>;
     }
-
-    const [count, setCount] = useState(0);
 
     const increment = () => {
             setCount(count + 1);
