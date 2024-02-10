@@ -2,9 +2,9 @@
 import style from './styles.module.scss';
 import classNames from "classnames";
 
-export const Button = ({ onClick, children, className, disabled }) => {
+export const Button = ({ onClick, children, className, disabled, rootRef }) => {
     return (
-        <button className={classNames(style.root, className)} onClick={onClick} disabled={disabled}>
+        <button ref={rootRef} className={classNames(style.root, className)} onClick={onClick} disabled={disabled}>
             {children}
         </button>
     )

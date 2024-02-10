@@ -1,0 +1,36 @@
+import { useEffect, useRef, useState } from "react";
+import { Button } from "../button/component";
+import { createPortal } from "react-dom";
+import { CartContainer } from "../cart/container";
+import styles from "./styles.module.scss";
+
+export const CartButton = ({ amount }) => {
+    const [coordinates, setCoordinates] = useState(null);
+    const buttonRef = useRef();
+
+    const toggleCartPopover = () => {
+        if (coordinates) {
+            setCoordinates(null);
+            return;
+        }
+        const {bottom,right} = buttonRef.current.getBoundingClientRect();
+        setCoordinates({ right: -right, top: bottom });
+    }
+    const popoverContainer = useRef(null);
+
+    useEffect(() => {
+        popoverContainer.current = document.getElementById("popover-container");
+    }, []);
+
+    return (
+        <div className={styles.root}>
+            <Button rootRef={buttonRef} onClick={toggleCartPopover}>
+                {amount}
+            </Button>
+            {coordinates && createPortal( 
+                <div style={coordinates} className={styles.popoverContainer}><CartContainer /></div>,  
+                popoverContainer.current
+            )}
+        </div>
+    );
+};

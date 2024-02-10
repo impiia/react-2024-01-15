@@ -2,6 +2,7 @@
 import { Dish } from "../dish/component";
 
 export const Menu = ({ dishIds }) => {
+
     return (
         <>
             <h3>Меню</h3>
