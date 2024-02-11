@@ -18,6 +18,11 @@ export const requestSlice = createSlice({
             ({ type }) => type.endsWith("/rejected"),
             (state, { meta }) => {
                 state[meta.requestId] = REQUEST_STATUS.fail;
-            })
+            }),
+    selectors: {
+        selectIsLoading: (state, id) => state[id] === REQUEST_STATUS.pending,
+    }
 }
 );
+
+export const {selectIsLoading} = requestSlice.selectors;

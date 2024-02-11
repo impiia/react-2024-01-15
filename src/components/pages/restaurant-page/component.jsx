@@ -6,9 +6,12 @@ import { selectRestaurantIds } from '../../../redux/entities/restaurant/selector
 import { RestaurantTabs } from '../../restaurant-tabs/component';
 import { Layout } from '../../layout/component';
 import { getRestaurants } from '../../../redux/entities/restaurant/thunks/get-restaurants';
+import { selectIsLoading } from '../../../redux/ui/request';
 
 
 export const RestaurantPage = () => {
+    const [requestId, setRequestId] = useState();
+    const isLoading = useSelector(state => requestId && selectIsLoading(state, requestId));
     const restaurantIds = useSelector(selectRestaurantIds);
     const [selectedRestaurantId, setSelectedRestaurantId] = useState(null);
     const selectRestaurant = (restaurantId) => {
@@ -17,12 +20,13 @@ export const RestaurantPage = () => {
 
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(getRestaurants());
+        setRequestId(dispatch(getRestaurants()).requestId); 
     }, []);
 
     return (
         <Layout>
-            <div className={style.root}>
+        {isLoading? (<div>is loading...</div>) : 
+           ( <div className={style.root}>
                 <RestaurantTabs
                     restaurantIds={restaurantIds}
                     onSelectRestaurant={selectRestaurant}
@@ -30,7 +34,8 @@ export const RestaurantPage = () => {
                 {selectedRestaurantId && <Restaurant restaurantId={selectedRestaurantId} /> 
                 }
 
-            </div>
+            </div>)
+        }
         </Layout>
     );
 };
