@@ -1,13 +1,17 @@
 import { Footer } from "../footer/component"
 import { Header } from "../header/component"
-import { RestaurantPage } from "../restaurant-page/component"
+import styles from './styles.module.scss'
 
-export const Layout = () => {
+export const Layout = ({ children }) => {
     return (
-        <>
-            <Header />
-            <RestaurantPage />
-            <Footer />
-        </>
+        <div className={styles.root}>
+          
+                <Header />
+                <div>{children}</div>
+                <Footer />
+        
+            <div id="modal-container" />
+            <div id="popover-container"className={styles.popoverContainer}/>
+        </div>
     )
 }

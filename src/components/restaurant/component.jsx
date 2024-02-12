@@ -8,6 +8,7 @@ import style from './styles.module.scss';
 export const Restaurant = ({ restaurantId }) => {
     const restaurant = useSelector(state => selectRestaurantById(state, restaurantId));
 
+
     if (!restaurant) {
         return <div>No restaurant found for ID: {restaurantId}</div>;
     }

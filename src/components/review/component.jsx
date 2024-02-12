@@ -5,18 +5,12 @@ import { selectUserById } from '../../redux/entities/user/selectors';
 
 export const Review = ({ reviewId }) => {
     const review = useSelector(state => selectReviewById(state, reviewId));
-    const user = useSelector(state => selectUserById(state, review.userId));
-   
-    if (!review) {
-        return <div>Отзыв не найден</div>;
-    }
-    if (!user) {
-        return <div>Пользователь не найден</div>;
-    }
+    const user = useSelector(state => selectUserById(state, review?.userId)); 
+
     return (
         <div className={style.root}>
-            <span>{user.name}: </span>
-            <span>{review.text}</span>
+           {user && <span>{user.name}: </span>}
+           {review && <span>{review.text}</span>}
         </div>
     )
 }
