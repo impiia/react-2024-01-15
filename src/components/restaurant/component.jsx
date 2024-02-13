@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { getReviewByRestaurantId } from '../../redux/entities/review/thunks/get-reviews';
 import { selectIsLoading } from '../../redux/ui/request';
 import styles from './styles.module.scss';
+import { ModalIsLoading } from '../modal-loading/component';
 
 export const Restaurant = ({ restaurantId }) => {
     const [requestId, setRequestId] = useState();
@@ -29,7 +30,7 @@ export const Restaurant = ({ restaurantId }) => {
             <h2>{restaurant.name}</h2>
 
             <Menu dishIds={restaurant.menu} />
-            {isLoading ? (<div>is loading...</div>) : (
+            {isLoading ? (<ModalIsLoading />) : (
                 <Reviews reviewIds={reviewsIds} />
             )}
         </div>

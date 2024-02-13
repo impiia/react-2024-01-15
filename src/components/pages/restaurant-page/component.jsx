@@ -7,6 +7,7 @@ import { RestaurantTabs } from '../../restaurant-tabs/component';
 import { Layout } from '../../layout/component';
 import { getRestaurants } from '../../../redux/entities/restaurant/thunks/get-restaurants';
 import { selectIsLoading } from '../../../redux/ui/request';
+import { ModalIsLoading } from '../../modal-loading/component';
 
 
 export const RestaurantPage = () => {
@@ -25,7 +26,7 @@ export const RestaurantPage = () => {
 
     return (
         <Layout>
-        {isLoading? (<div>is loading...</div>) : 
+        {isLoading? (<ModalIsLoading />) : 
            ( <div className={style.root}>
                 <RestaurantTabs
                     restaurantIds={restaurantIds}

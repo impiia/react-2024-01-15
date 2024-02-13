@@ -1,8 +1,8 @@
-import { Dish } from "../dish/component"
+import { DishContainer } from "../dish/container"
 
 export const Cart = ({productIds}) => {
     return <div>
-        {productIds?.length ? (productIds.map((productId) => <Dish key={productId} dishId={productId} /> ))
+        {productIds?.length ? (productIds.map((productId) => <DishContainer key={productId} dishId={productId} /> ))
             : "Empty"}  
     </div>
 
