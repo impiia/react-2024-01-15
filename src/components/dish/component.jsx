@@ -16,19 +16,20 @@ export const Dish = ({ dishId }) => {
   useEffect(() => {
     setRequestId(dispatch(getDishById(dishId)).requestId);
   }, [dispatch, dishId]);
+
   const amount = useSelector((state) =>
     selectProductAmountById(state, dishId)
   );
 
   return (
     <div className={style.root}>
-    {isLoading? (<div>is loading...</div>) : 
-      (dish && (
-        <div>
-          <div>{dish.name}</div>
-          <div>{dish.price}</div>
-        </div>
-      ))}
+      {isLoading ? (<div>is loading...</div>) :
+        (dish && (
+          <div>
+            <div>{dish.name}</div>
+            <div>{dish.price}</div>
+          </div>
+        ))}
       <div className={style.buttonContainer}>
         <Button className={style.button} onClick={() => dispatch(decrement(dishId))} disabled={amount === 0}>-</Button>
         <p>{amount}</p>

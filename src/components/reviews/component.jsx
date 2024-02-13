@@ -3,14 +3,12 @@ import { ReviewForm } from '../review-form/component';
 import { useContext, useEffect } from 'react';
 import { UserContext } from '../../contexts/user';
 import { useDispatch } from 'react-redux';
-import { getReviews } from '../../redux/entities/review/thunks/get-reviews';
 import { getUsers } from '../../redux/entities/user/thunks/get-users';
 
 export const Reviews = ({ reviewIds }) => {
     const { name, email } = useContext(UserContext);
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(getReviews());
         dispatch(getUsers());
     }, []);
 
