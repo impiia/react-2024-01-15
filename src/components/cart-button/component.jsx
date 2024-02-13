@@ -19,6 +19,19 @@ export const CartButton = ({ amount }) => {
     const popoverContainer = useRef(null);
 
     useEffect(() => {
+        const handleResize = () => {
+            if (coordinates) {
+                const { bottom, right } = buttonRef.current.getBoundingClientRect();
+                setCoordinates({ right: -right, top: bottom });
+            }
+        };
+        window.addEventListener("resize", handleResize);
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, [coordinates]); 
+
+    useEffect(() => {
         popoverContainer.current = document.getElementById("popover-container");
     }, []);
 
