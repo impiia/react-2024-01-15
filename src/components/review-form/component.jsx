@@ -19,7 +19,7 @@ function reducer(state, action) {
 export const ReviewForm = ({ user, review, restaurantId, onEditCancel }) => {
     const isEditMode = !!review;
     const { name: userName } = useContext(UserContext);
-    const [createReview, { isLoading: createReviewisLoading }] = useCreateReviewMutation();
+    const [createReview, { isLoading: createReviewIsLoading }] = useCreateReviewMutation();
     const [updateReview, { isLoading: updateReviewIsLoading }] = useUpdateReviewMutation();
     const [state, dispatch] = useReducer(reducer, {
         name: user || userName,
@@ -72,7 +72,7 @@ export const ReviewForm = ({ user, review, restaurantId, onEditCancel }) => {
 
     return (
         <>
-            {createReviewisLoading || updateReviewIsLoading ? <Loader /> : (
+            {createReviewIsLoading || updateReviewIsLoading ? <Loader /> : (
                 <form className={styles.root} onSubmit={handleSubmit}>
                     <div className={styles.field}>
                         <span id="name">Имя: {state.name}</span>
@@ -101,8 +101,8 @@ export const ReviewForm = ({ user, review, restaurantId, onEditCancel }) => {
                         />
                     </div>
                     <div className={styles.buttons}>
-                        {isEditMode && <Button className={styles.button} onClick={handleEditCancel}>Cancel</Button>}
-                        <Button className={styles.button} type="submit">Submit</Button>
+                        {isEditMode && <Button onClick={handleEditCancel}>Cancel</Button>}
+                        <Button type="submit">Submit</Button>
                     </div>
                 </form>
             )}
