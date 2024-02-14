@@ -1,13 +1,7 @@
-.pageLink {
-  margin: 10px 0 10px 10px;
-
-  &:last-of-type {
-    margin-right: 10px;
+  .loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
   }
-}
-  
-
-
-  
-
-  

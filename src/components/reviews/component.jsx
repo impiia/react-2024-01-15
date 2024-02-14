@@ -3,7 +3,7 @@ import { ReviewForm } from '../review-form/component';
 import { useContext } from 'react';
 import { UserContext } from '../../contexts/user';
 
-export const Reviews = ({ reviews }) => {
+export const Reviews = ({ reviews, restaurantId }) => {
     const { name, email } = useContext(UserContext);
     const isAuthenticated = name !== "" && email !== "";
 
@@ -17,7 +17,7 @@ export const Reviews = ({ reviews }) => {
                     </li>
                 ))}
             </ul>
-            {isAuthenticated && <ReviewForm />}
+            {isAuthenticated && <ReviewForm restaurantId={restaurantId}/>}
         </>
     )
 }

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { decrement, increment, selectProductAmountById } from '../../redux/ui/cart';
 import { Dish } from './component';
 import { useGetDishByIdQuery } from '../../redux/services/api';
+import { Loader } from '../loader/component';
 
 export const DishContainer = ({ dishId }) => {
 
@@ -16,7 +17,7 @@ export const DishContainer = ({ dishId }) => {
 
     return (
         <div className={style.root}>
-            {isLoading ? <div>Loading...</div> :
+            {isLoading ? <Loader/> :
                 (dish && (
                     <Dish dish={dish} />
                 ))}
