@@ -55,9 +55,20 @@ export const api = createApi(
                 }),
                 invalidatesTags: (result, _, {restaurantId})=> [{type: "Restaurant", id:restaurantId}],
             }),
-        })
+            updateReview: builder.mutation({
+                query: ({ review }) => ({
+                  url: `review/${review.id}`,
+                  method: "PATCH",
+                  body: review,
+                }),
+                invalidatesTags: (result, _, { review }) => [
+                  {
+                    type: "Review",
+                    id: review.id,
+                  },
+                ],
+              }),
+            }),
+          });
 
-    }
-);
-
-export const { useGetDishesQuery, useGetRestaurantsQuery, useGetReviewsByRestaurantIdQuery, useGetDishByIdQuery, useGetDishesByRestaurantIdQuery, useGetUsersQuery, useCreateReviewMutation } = api;
+export const { useGetDishesQuery, useGetRestaurantsQuery, useGetReviewsByRestaurantIdQuery, useGetDishByIdQuery, useGetDishesByRestaurantIdQuery, useGetUsersQuery, useCreateReviewMutation, useUpdateReviewMutation } = api;

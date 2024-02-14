@@ -9,7 +9,7 @@ export const Restaurant = ({ restaurantId }) => {
   const { data: restaurant } = useGetRestaurantsQuery(undefined, {
     selectFromResult: (result) => ({
       ...result,
-      data: result.data.find(({ id }) => restaurantId === id),
+      data: result.data?.find(({ id }) => restaurantId === id),
     }),
   });
 

@@ -2,7 +2,7 @@ import styles from './styles.module.scss';
 import { useReducer, useContext } from "react";
 import { UserContext } from '../../contexts/user';
 import { Button } from '../button/component';
-import { useCreateReviewMutation } from '../../redux/services/api';
+import { useCreateReviewMutation, useUpdateReviewMutation } from '../../redux/services/api';
 import { Loader } from '../loader/component';
 
 function reducer(state, action) {
@@ -16,14 +16,20 @@ function reducer(state, action) {
     }
 }
 
-export const ReviewForm = ({ restaurantId }) => {
+export const ReviewForm = ({ user, review, restaurantId, onEditCancel }) => {
+    const isEditMode = !!review;
     const { name: userName } = useContext(UserContext);
-    const [createReview, { isLoading }] = useCreateReviewMutation();
+    const [createReview, { isLoading: createReviewisLoading }] = useCreateReviewMutation();
+    const [updateReview, { isLoading: updateReviewIsLoading }] = useUpdateReviewMutation();
     const [state, dispatch] = useReducer(reducer, {
-        name: userName || "",
-        text: "",
-        rating: "",
+        name: user || userName,
+        text: review?.text || "",
+        rating: review?.rating || "",
     });
+
+    const handleEditCancel = () => {
+        onEditCancel();
+    };
 
     const handleTextChange = (event) => {
         dispatch({ type: "change_text", payload: event.target.value });
@@ -33,31 +39,43 @@ export const ReviewForm = ({ restaurantId }) => {
         dispatch({ type: "change_rating", payload: event.target.value });
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        createReview({
-            restaurantId,
-            newReview: {
-                userId: "dfb982e9-b432-4b7d-aec6-7f6ff2e6af54",
-                text: state.text,
-                rating: state.rating,
-            },
-        }).unwrap().then(() => {
+
+        try {
+            if (review) {
+                await updateReview({
+                    review: {
+                        id: review.id,
+                        text: state.text,
+                        rating: state.rating,
+                    },
+                }).unwrap();
+                onEditCancel();
+            } else {
+                await createReview({
+                    restaurantId,
+                    newReview: {
+                        userId: "dfb982e9-b432-4b7d-aec6-7f6ff2e6af54",
+                        text: state.text,
+                        rating: state.rating,
+                    },
+                }).unwrap();
+            }
             dispatch({ type: "change_text", payload: "" });
             dispatch({ type: "change_rating", payload: "" });
-        }).catch((error) => {
+        } catch (error) {
             console.error("Error while submitting the review", error);
-        });
+        }
     };
+
 
     return (
         <>
-            {isLoading ? <Loader /> : (
+            {createReviewisLoading || updateReviewIsLoading ? <Loader /> : (
                 <form className={styles.root} onSubmit={handleSubmit}>
                     <div className={styles.field}>
-                        <span id="name">
-                            Имя: {userName}
-                        </span>
+                        <span id="name">Имя: {state.name}</span>
                     </div>
                     <div className={styles.field}>
                         <label htmlFor="text">Текст</label>
@@ -82,7 +100,10 @@ export const ReviewForm = ({ restaurantId }) => {
                             onChange={handleRatingChange}
                         />
                     </div>
-                    <Button className={styles.submitButton} type="submit">Submit</Button>
+                    <div className={styles.buttons}>
+                        {isEditMode && <Button className={styles.button} onClick={handleEditCancel}>Cancel</Button>}
+                        <Button className={styles.button} type="submit">Submit</Button>
+                    </div>
                 </form>
             )}
         </>
