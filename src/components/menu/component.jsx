@@ -1,5 +1,3 @@
-
-import { Dish } from "../dish/component";
 import { DishContainer } from "../dish/container";
 
 export const Menu = ({ dishIds }) => {
