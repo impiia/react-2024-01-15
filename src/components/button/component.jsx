@@ -1,12 +1,10 @@
-import { forwardRef } from 'react';
 import styles from './styles.module.scss';
 import classNames from "classnames";
 
-export const Button = forwardRef(
-    function Button({ onClick, children, className, disabled }, ref ) {
+export const Button = ({ onClick, children, className, disabled, rootRef }) => {
     return (
-        <button ref={ref} className={classNames(styles.root, className)} onClick={onClick} disabled={disabled}>
+        <button ref={rootRef} className={classNames(styles.root, className)} onClick={onClick} disabled={disabled}>
             {children}
         </button>
-    )
-})
+    );
+};

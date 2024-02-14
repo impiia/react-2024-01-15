@@ -37,12 +37,12 @@ export const CartButton = ({ amount }) => {
 
     return (
         <div className={styles.root}>
-            <Button ref={buttonRef} onClick={toggleCartPopover}>
+            <Button rootRef={buttonRef} onClick={toggleCartPopover}>
                 {amount}
             </Button>
             {coordinates && createPortal( 
                 <div style={coordinates} className={styles.popoverContainer}><CartContainer /></div>,  
-                document.getElementById("popover-container")
+                popoverContainer.current,
             )}
         </div>
     );
