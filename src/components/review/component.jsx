@@ -8,15 +8,12 @@ import { useState } from 'react';
 export const Review = ({ review }) => {
     const [isEditing, setIsEditing] = useState(false);
     const { data: user, isLoading } = useGetUsersQuery(undefined, {
-        selectFromResult: ({ data }) => ({
-            data: data?.find(user => user.id === review.userId),
-        }),
-        // selectFromResult: (result) => {
-        //     return ({
-        //         ...result,
-        //         data: result.data?.find(({id}) => review.userId === id),
-        //     })
-        // }
+        selectFromResult: (result) => {
+            return ({
+                ...result,
+                data: result.data?.find(({id}) => review.userId === id),
+            })
+        }
     });
 
     const handleEditCancel = () => {
