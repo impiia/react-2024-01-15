@@ -1,30 +1,23 @@
 import style from './styles.module.scss';
 import { Button } from '../button/component';
 import { useDispatch, useSelector } from 'react-redux';
-import { decrement, increment, selectProductAmountById } from '../../redux/ui/cart';
+import { decrement, increment, selectProductAmountById  } from '../../redux/ui/cart';
 import { Dish } from './component';
-import { useGetDishByIdQuery } from '../../redux/services/api';
-import { Loader } from '../loader/component';
 
-export const DishContainer = ({ dishId }) => {
-
-    const { isLoading, data: dish } = useGetDishByIdQuery(dishId);
-
+export const DishContainer = ({ dish }) => {
     const amount = useSelector((state) =>
-        selectProductAmountById(state, dishId)
+    selectProductAmountById(state, dish.id)
     );
     const dispatch = useDispatch();
 
     return (
+
         <div className={style.root}>
-            {isLoading ? <Loader/> :
-                (dish && (
-                    <Dish dish={dish} />
-                ))}
+             <Dish dish={dish}></Dish> 
             <div className={style.buttonContainer}>
-                <Button className={style.button} onClick={() => dispatch(decrement(dishId))} disabled={amount === 0}>-</Button>
+                <Button className={style.button} onClick={() => dispatch(decrement(dish.id))} disabled={amount === 0}>-</Button>
                 <p>{amount}</p>
-                <Button className={style.button} onClick={() => dispatch(increment(dishId))} disabled={amount === 5}>+</Button>
+                <Button className={style.button} onClick={() => dispatch(increment(dish.id))} disabled={amount === 5}>+</Button>
             </div>
         </div>
     );
