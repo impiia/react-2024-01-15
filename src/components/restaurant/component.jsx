@@ -1,8 +1,7 @@
-import { Menu } from '../menu/component';
 import { Reviews } from '../reviews/component';
 import styles from './styles.module.scss';
-import { useGetRestaurantsQuery, useGetReviewsByRestaurantIdQuery } from '../../redux/services/api';
-import { Loader } from '../loader/component';
+import { useGetRestaurantsQuery } from '../../redux/services/api';
+import { MenuContainer } from '../menu/container';
 
 export const Restaurant = ({ restaurantId }) => {
 
@@ -13,18 +12,13 @@ export const Restaurant = ({ restaurantId }) => {
     }),
   });
 
-  const { data: reviews, isLoading } = useGetReviewsByRestaurantIdQuery(restaurantId);
-
   return (
     <div className={styles.root}>
       <h2>{restaurant.name}</h2>
 
-      <Menu dishIds={restaurant.menu} />
-      {isLoading ? (
-        <Loader/>
-      ) : (
-          <Reviews reviews={reviews} restaurantId={restaurantId} />         
-      )}
+      <MenuContainer restaurantId={restaurant.id} />
+      <Reviews restaurantId={restaurantId} /> 
+
     </div>
   );
 };
