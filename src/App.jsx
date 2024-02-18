@@ -4,7 +4,7 @@ import { store } from "./redux";
 import { Provider } from "react-redux";
 import { RestaurantPage } from "./pages/restaurant-page/component";
 import { Layout } from "./components/layout/component";
-import { createBrowserRouter, RouterProvider, } from "react-router-dom";
+import { createBrowserRouter, Navigate, Outlet, RouterProvider, } from "react-router-dom";
 import { HomePage } from "./pages/home-page/home-page";
 import { ContactsPage } from "./pages/contacts-page/contacts-page";
 import { AboutUsPage } from "./pages/about-us-page/home-page";
@@ -38,15 +38,19 @@ export const App = () => {
           children: [
             {
               path: ":restaurantId",
-              element:  null,
+              element:
+                <div>
+                  <Outlet />
+                  <Navigate to="menu" />
+                </div>,
               children: [
                 {
                   path: "menu",
-                   element: <div><MenuContainer /></div>,
+                  element: <div><MenuContainer /></div>,
                 },
                 {
                   path: "reviews",
-                   element: <div><Reviews /></div>,
+                  element: <div><Reviews /></div>,
                 },
               ],
             },
