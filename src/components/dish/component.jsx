@@ -1,9 +1,9 @@
-export const Dish = ({ dish }) => {
+export const Dish = ({ dish, className }) => {
 
   return (
     <div >
-      <div>{dish.name}</div>
-      <div>{dish.price}</div>
+      <div className={className}>{dish.name}</div>
+      <div className={className}>{dish.price}</div>
     </div>
   );
 };

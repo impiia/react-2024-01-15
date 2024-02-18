@@ -16,21 +16,14 @@ export const Restaurant = () => {
     return <Loader className={styles.loader} />;
   }
   if (!restaurant) {
-    return <div>Restaurant not found</div>;
+    return null;
   }
 
   return (
     <div className={styles.root}>
       <h2>{restaurant.name}</h2>
-      {/* <Outlet /> */}
-
       <ControlTabs restaurantId={restaurant.id} />
       <Outlet />
-
-      {/* <MenuContainer restaurantId={restaurantId} />
-  
-      <Reviews restaurantId={restaurantId} />  */}
-
     </div>
   );
 };

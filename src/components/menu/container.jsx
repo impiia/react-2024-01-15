@@ -6,7 +6,9 @@ import { Menu } from "./component";
 export const MenuContainer = () => {
     const restaurantId = useParams().restaurantId;
     const { data: dishes, isLoading } = useGetDishesByRestaurantIdQuery(restaurantId);
-
+    if (isLoading) {
+        return <Loader />;
+    }
     return (
         <>
             {isLoading ? <Loader /> : <Menu dishes={dishes} />}

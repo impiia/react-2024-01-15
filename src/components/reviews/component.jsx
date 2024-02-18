@@ -8,6 +8,10 @@ export const Reviews = () => {
     const restaurantId = useParams().restaurantId;
     const { data: reviews, isLoading } = useGetReviewsByRestaurantIdQuery(restaurantId);
 
+    if (isLoading) {
+        return <Loader />;
+    }
+
     return (
         <>
             <h3>Отзывы</h3>

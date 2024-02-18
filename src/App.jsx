@@ -4,13 +4,13 @@ import { store } from "./redux";
 import { Provider } from "react-redux";
 import { RestaurantPage } from "./pages/restaurant-page/component";
 import { Layout } from "./components/layout/component";
-import { createBrowserRouter, Navigate, Outlet, RouterProvider, } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, } from "react-router-dom";
 import { HomePage } from "./pages/home-page/home-page";
 import { ContactsPage } from "./pages/contacts-page/contacts-page";
 import { AboutUsPage } from "./pages/about-us-page/home-page";
-import { Restaurant } from "./components/restaurant/component";
 import { MenuContainer } from "./components/menu/container";
 import { Reviews } from "./components/reviews/component";
+import { DishPage } from "./pages/dish-page/dish-page";
 
 export const App = () => {
   const [user, setUser] = useState({ name: "", email: "" });
@@ -52,6 +52,10 @@ export const App = () => {
             },
           ],
         },
+        {
+          path: "dish/:dishId",
+          element: <DishPage />
+        }
       ],
     },
 
