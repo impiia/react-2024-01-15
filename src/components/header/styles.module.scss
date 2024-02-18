@@ -1,17 +1,32 @@
 .root {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   height: 50px;
   color: white;
   background-color: rgb(48, 92, 92);
-  padding: 10px ;
+  padding: 10px 20px;
 }
 
 .user {
   display: flex;
+
 }
 
 .button {
   margin-right: 5px;
+}
+
+.logo {
+  color: white;
+}
+
+.link {
+  color: white;
+  text-decoration: none;
+  transition: opacity 0.1s;
+
+  &:hover {
+    opacity: 0.5;
+  }
 }
