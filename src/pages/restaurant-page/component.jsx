@@ -1,7 +1,6 @@
-import { Restaurant } from '../../restaurant/component';
+import { RestaurantTabs } from '../../components/restaurant-tabs/component';
+import { Restaurant } from '../../components/restaurant/component';
 import style from './styles.module.scss';
-import { RestaurantTabs } from '../../restaurant-tabs/component';
-import { Layout } from '../../layout/component';
 import { useState } from 'react';
 
 
@@ -12,7 +11,6 @@ export const RestaurantPage = () => {
     };
  
     return (
-        <Layout>
             <div className={style.root}>
                 <RestaurantTabs
                     onSelectRestaurant={selectRestaurant}
@@ -20,6 +18,5 @@ export const RestaurantPage = () => {
                 {selectedRestaurantId && <Restaurant restaurantId={selectedRestaurantId} /> 
                 }
             </div>
-        </Layout>
     );
 };
