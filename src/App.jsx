@@ -11,6 +11,7 @@ import { AboutUsPage } from "./pages/about-us-page/home-page";
 import { MenuContainer } from "./components/menu/container";
 import { Reviews } from "./components/reviews/component";
 import { DishPage } from "./pages/dish-page/dish-page";
+import { RestaurantDefaultPage } from "./pages/restaurant-default-page/component";
 
 export const App = () => {
   const [user, setUser] = useState({ name: "", email: "" });
@@ -38,11 +39,7 @@ export const App = () => {
           children: [
             {
               path: ":restaurantId",
-              element:
-                <div>
-                  <Outlet />
-                  <Navigate to="menu" />
-                </div>,
+              element: <RestaurantDefaultPage defaultTab="menu" />,
               children: [
                 {
                   path: "menu",
