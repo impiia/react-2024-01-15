@@ -1,37 +1,24 @@
-import { Menu } from '../menu/component';
 import { Reviews } from '../reviews/component';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectRestaurantById, selectRestaurantReviewsById } from '../../redux/entities/restaurant/selectors';
-import { useEffect, useState } from 'react';
-import { getReviewByRestaurantId } from '../../redux/entities/review/thunks/get-reviews';
-import { selectIsLoading } from '../../redux/ui/request';
 import styles from './styles.module.scss';
+import { useGetRestaurantsQuery } from '../../redux/services/api';
+import { MenuContainer } from '../menu/container';
 
 export const Restaurant = ({ restaurantId }) => {
-    const [requestId, setRequestId] = useState();
-    const isLoading = useSelector(state => requestId && selectIsLoading(state, requestId));
 
+  const { data: restaurant } = useGetRestaurantsQuery(undefined, {
+    selectFromResult: (result) => ({
+      ...result,
+      data: result.data?.find(({ id }) => restaurantId === id),
+    }),
+  });
 
-    const restaurant = useSelector(state => selectRestaurantById(state, restaurantId));
-    const dispatch = useDispatch();
-    const reviewsIds = useSelector(state => selectRestaurantReviewsById(state, restaurantId));
+  return (
+    <div className={styles.root}>
+      <h2>{restaurant.name}</h2>
 
-    useEffect(() => {
-        dispatch(getReviewByRestaurantId(restaurantId));
-    }, [dispatch, restaurantId]);
+      <MenuContainer restaurantId={restaurant.id} />
+      <Reviews restaurantId={restaurantId} /> 
 
-    useEffect(() => {
-        setRequestId(dispatch(getReviewByRestaurantId(restaurantId)).requestId);
-    }, [dispatch, restaurantId]);
-
-    return (
-        <div className={styles.root}>
-            <h2>{restaurant.name}</h2>
-
-            <Menu dishIds={restaurant.menu} />
-            {isLoading ? (<div>is loading...</div>) : (
-                <Reviews reviewIds={reviewsIds} />
-            )}
-        </div>
-    );
+    </div>
+  );
 };

@@ -1,31 +1,24 @@
 import { Review } from '../review/component'
-import { ReviewForm } from '../review-form/component';
-import { useContext, useEffect } from 'react';
-import { UserContext } from '../../contexts/user';
-import { useDispatch } from 'react-redux';
-import { getUsers } from '../../redux/entities/user/thunks/get-users';
+import { Loader } from '../loader/component';
+import { useGetReviewsByRestaurantIdQuery } from '../../redux/services/api';
+import { CreateReviewFormContainer } from '../create-review-form/container';
 
-export const Reviews = ({ reviewIds }) => {
-    const { name, email } = useContext(UserContext);
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(getUsers());
-    }, []);
-
-
-    const isAuthenticated = name !== "" && email !== "";
+export const Reviews = ({ restaurantId }) => {
+    const { data: reviews, isLoading } = useGetReviewsByRestaurantIdQuery(restaurantId);
 
     return (
         <>
             <h3>Отзывы</h3>
-            <ul>
-                {reviewIds.map((reviewId, index) => (
-                    <li key={index}>
-                        <Review reviewId={reviewId} />
-                    </li>
-                ))}
-            </ul>
-            {isAuthenticated && <ReviewForm />}
+            {isLoading ? <Loader /> : (
+                <ul>
+                    {reviews.map((review, index) => (
+                        <li key={index}>
+                            <Review review={review} />
+                        </li>
+                    ))}
+                </ul>
+            )}
+            <CreateReviewFormContainer restaurantId={restaurantId} />
         </>
     )
 }

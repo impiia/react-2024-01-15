@@ -1,3 +1,3 @@
 import React from "react";
 
-export const UserContext = React.createContext({ name: "", email: "" });
+export const UserContext = React.createContext({ id: "", name: "", email: "" });

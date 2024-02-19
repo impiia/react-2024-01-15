@@ -1,19 +1,40 @@
-import { useDispatch, useSelector } from 'react-redux';
 import style from './styles.module.scss';
-import { selectReviewById } from '../../redux/entities/review/selectors';
-import { selectUserById } from '../../redux/entities/user/selectors';
+import { useGetUsersQuery } from '../../redux/services/api';
+import { Loader } from '../loader/component';
+import { Button } from '../button/component';
+import { useState } from 'react';
+import { UpdateReviewFormContainer } from '../update-review-form/container';
 
-export const Review = ({ reviewId }) => {
+export const Review = ({ review }) => {
+    const [isEditMode, setIsEditMode] = useState(false);
+    const { data: user, isLoading } = useGetUsersQuery(undefined, {
+        selectFromResult: (result) => {
+            return ({
+                ...result,
+                data: result.data?.find(({ id }) => review.userId === id),
+            })
+        }
+    });
 
-    const review = useSelector(state => selectReviewById(state, reviewId));
-    const user = useSelector(state => selectUserById(state, review?.userId));
-
+    const handleCancelClick = () => {
+        setIsEditMode(false);
+    };
 
     return (
-        <div className={style.root}>
-
-            {user && <span>{user.name}: </span>}
-            {review && <span>{review.text}</span>}
-        </div>
-    )
+        isLoading ? (
+            <Loader />
+        ) : (
+            <div className={style.root}>
+                {user && <span>{user.name + ': '}</span>}
+                <span>{review.text + ' '}</span>
+                <Button onClick={() => {
+                    setIsEditMode(true);
+                }}>Edit</Button>
+                {isEditMode && <UpdateReviewFormContainer
+                    user={user}
+                    review={review}
+                    onUpdatedFinishet={() => setIsEditMode(false)} onClose={handleCancelClick}/>}
+            </div>
+        )
+    );
 }

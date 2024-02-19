@@ -1,17 +1,19 @@
-import { selectRestaurantIds } from '../../redux/entities/restaurant/selectors';
+import { useGetRestaurantsQuery } from '../../redux/services/api';
+import { Loader } from '../loader/component';
 import { Tab } from '../tab/component';
-import { useSelector } from 'react-redux';
+import styles from "./styles.module.scss";
 
 export const RestaurantTabs = ({ onSelectRestaurant }) => {
-    const restaurantIds = useSelector(selectRestaurantIds);
-
+    const { data: restaurants, isLoading } = useGetRestaurantsQuery();
     return (
         <>
-            {restaurantIds.map((restaurantId) => {
-                return (
-                    <Tab key={restaurantId} id={restaurantId}  onClick={()=>onSelectRestaurant(restaurantId)}/>
-                );
-            })}
+            {isLoading ? (
+                <Loader className={styles.loader}/>
+            ) : (
+                restaurants.map(({ id, name }) => (
+                    <Tab key={id} id={id} onClick={() => onSelectRestaurant(id)} title={name} />
+                ))
+            )}
         </>
     );
 };

@@ -1,17 +1,18 @@
+import { DishContainer } from "../dish/container";
 
-import { Dish } from "../dish/component";
-
-export const Menu = ({ dishIds }) => {
+export const Menu = ({ dishes }) => {
 
     return (
         <>
             <h3>Меню</h3>
             <ul>
-                {dishIds.map((dishId, index) => (
-                    <li key={index}> 
-                        <Dish dishId={dishId} />
-                    </li>
-                ))}
+                {dishes?.map((dish) => {
+                    return (
+                        <li key={dish.id}>
+                            <DishContainer dish={dish} />
+                        </li>
+                    );
+                })}
             </ul>
         </>
     );

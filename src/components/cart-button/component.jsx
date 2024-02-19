@@ -42,7 +42,7 @@ export const CartButton = ({ amount }) => {
             </Button>
             {coordinates && createPortal( 
                 <div style={coordinates} className={styles.popoverContainer}><CartContainer /></div>,  
-                popoverContainer.current
+                popoverContainer.current,
             )}
         </div>
     );

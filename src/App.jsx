@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Layout } from './components/layout/component';
 import { UserContext } from "./contexts/user";
 import { store } from "./redux";
 import { Provider } from "react-redux";

@@ -6,7 +6,7 @@ import { Modal } from '../modal-login-form/component';
 import { CartButtonContainer } from '../cart-button/container';
 
 export const Header = () => {
-    const { name, email, setUser } = useContext(UserContext);
+    const { name, email, id, setUser } = useContext(UserContext);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const isAuthenticated = name !== "" && email !== "";
    
@@ -29,6 +29,7 @@ export const Header = () => {
                     <div>
                         <span style={{ marginRight: "10px" }}>name: {name}</span>
                         <span style={{ marginRight: "10px" }}>e-mail: {email}</span>
+                        <span style={{ marginRight: "10px" }}>id: {id}</span>
                         <Button className={styles.button} onClick={handleLogoutClick} >Logout</Button>
                     </div>
                 ) : (

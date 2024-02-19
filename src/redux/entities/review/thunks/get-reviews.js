@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { selectReviewById, selectReviewIds } from "../selectors";
+import { selectReviewIds } from "../selectors";
 import { selectRestaurantReviewsById } from "../../restaurant/selectors";
 
 

@@ -1,36 +1,12 @@
+import { Button } from "../button/component";
 import styles from './styles.module.scss';
-import { useReducer, useContext } from "react";
-import { UserContext } from '../../contexts/user';
+import { useReviewForm } from "./use-review-form";
 
-function reducer(state, action) {
-    switch (action.type) {
-        case "change_text":
-            return { ...state, text: action.payload };
-        case "change_rating":
-            return { ...state, rating: action.payload };
-        default:
-            return state;
-    }
-}
-
-export const ReviewForm = () => {
-    const { name: userName } = useContext(UserContext);
-    const [state, dispatch] = useReducer(reducer, {
-        name: userName || "",
-        text: "",
-        rating: "",
-    });
-
-    const handleTextChange = (event) => {
-        dispatch({ type: "change_text", payload: event.target.value });
-    };
-
-    const handleRatingChange = (event) => {
-        dispatch({ type: "change_rating", payload: event.target.value });
-    };
+export const ReviewForm = ({ initialState, onSave, onClose, userName }) => {
+    const { form, setText, setRating } = useReviewForm(initialState);
 
     return (
-        <form className={styles.root}>
+        <div className={styles.root} >
             <div className={styles.field}>
                 <span id="name">
                     Имя: {userName}
@@ -42,8 +18,8 @@ export const ReviewForm = () => {
                     id="text"
                     name="text"
                     placeholder="Напишите ваш отзыв"
-                    value={state.text}
-                    onChange={handleTextChange}
+                    value={form.text}
+                    onChange={setText}
                 />
             </div>
             <div className={styles.field}>
@@ -55,11 +31,15 @@ export const ReviewForm = () => {
                     min="1"
                     max="5"
                     placeholder="Оцените от 1 до 5"
-                    value={state.rating}
-                    onChange={handleRatingChange}
+                    value={form.rating}
+                    onChange={setRating}
                 />
             </div>
-        </form>
+            <div className={styles.buttons}>
+                {onClose && <Button className={styles.submitButton} onClick={() => onClose(form)}>Cansel</Button>}
+                <Button className={styles.submitButton} onClick={() => onSave(form)}>Submit</Button>
+            </div>
 
-    )
+        </div>
+    );
 }

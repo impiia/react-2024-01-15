@@ -17,10 +17,14 @@ export const cartSlice = createSlice({
         },
     },
     selectors: {
-        selectProductAmountById: (state, productId) => state[productId] || 0,
-        selectProductAmount: (state) => Object.values(state).reduce((acc,amount)=>{
-            return acc + amount;
-        },0),
+        selectProductAmountById: (state, productId) => {
+            const amount = state[productId] || 0;
+            return amount;
+        },        
+        selectProductAmount: (state) =>
+            Object.values(state).reduce((acc, amount) => {
+                return acc + amount;
+            }, 0),
         selectCartProductIds: createSelector(
             (state) => state,
             (state) => Object.keys(state)
