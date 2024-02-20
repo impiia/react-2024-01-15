@@ -1,24 +1,13 @@
-import { useParams } from 'react-router-dom';
-import { RestaurantTabs } from '../../components/restaurant-tabs/component';
-import { Restaurant } from '../../components/restaurant/component';
+import { Outlet } from 'react-router-dom';
 import style from './styles.module.scss';
-import { useState } from 'react';
-
+import { RestaurantTabsContainer } from '../../components/restaurant-tabs/container';
 
 export const RestaurantPage = () => {
-    const { restaurantId } = useParams();
-    const [selectedRestaurantId, setSelectedRestaurantId] = useState(restaurantId);
-    const selectRestaurant = (restaurantId) => {
-        setSelectedRestaurantId(restaurantId);
-    };
- 
+
     return (
-            <div className={style.root}>
-                <RestaurantTabs
-                     onSelectRestaurant={selectRestaurant}
-                />
-                {selectedRestaurantId && <Restaurant restaurantId={restaurantId}/> 
-                }
-            </div>
+        <div className={style.root}>
+            <RestaurantTabsContainer />
+            <Outlet />
+        </div>
     );
 };

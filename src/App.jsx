@@ -4,14 +4,14 @@ import { store } from "./redux";
 import { Provider } from "react-redux";
 import { RestaurantPage } from "./pages/restaurant-page/component";
 import { Layout } from "./components/layout/component";
-import { createBrowserRouter, Navigate, Outlet, RouterProvider, } from "react-router-dom";
+import { createBrowserRouter, Navigate, RouterProvider, } from "react-router-dom";
 import { HomePage } from "./pages/home-page/home-page";
 import { ContactsPage } from "./pages/contacts-page/contacts-page";
 import { AboutUsPage } from "./pages/about-us-page/home-page";
 import { MenuContainer } from "./components/menu/container";
 import { Reviews } from "./components/reviews/component";
 import { DishPage } from "./pages/dish-page/dish-page";
-import { RestaurantDefaultPage } from "./pages/restaurant-default-page/component";
+import { Restaurant } from "./components/restaurant/component";
 
 export const App = () => {
   const [user, setUser] = useState({ name: "", email: "" });
@@ -39,15 +39,19 @@ export const App = () => {
           children: [
             {
               path: ":restaurantId",
-              element: <RestaurantDefaultPage defaultTab="menu" />,
+              element: <Restaurant />,
               children: [
                 {
+                  index: true,
+                  element: <Navigate to="menu" replace/>,
+                },
+                {
                   path: "menu",
-                  element: <div><MenuContainer /></div>,
+                  element: <MenuContainer />,
                 },
                 {
                   path: "reviews",
-                  element: <div><Reviews /></div>,
+                  element: <Reviews />,
                 },
               ],
             },
