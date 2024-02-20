@@ -2,7 +2,7 @@
 import { NavLink } from 'react-router-dom';
 import { Tab } from '../tab/component';
 
-export const RestaurantTabs = ({restaurants, onSelectRestaurant}) => {
+export const RestaurantTabs = ({restaurants}) => {
     return (
         <>
             {restaurants.map(({ id, name }) => (
@@ -10,7 +10,6 @@ export const RestaurantTabs = ({restaurants, onSelectRestaurant}) => {
                     {
                         ({ isActive }) =>
                             <Tab id={id}
-                                onClick={() => onSelectRestaurant(id)}
                                 title={name}
                                 disabled={isActive}
                             />}
