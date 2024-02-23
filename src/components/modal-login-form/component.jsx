@@ -16,7 +16,7 @@ const reducer = (state, action) => {
 };
 
 export const Modal = ({ isOpen, onClose }) => {
-  const { setUser } = useContext(UserContext);
+  const { updateUser } = useContext(UserContext);
 
   const [state, dispatch] = useReducer(reducer, {
     name: "",
@@ -32,7 +32,7 @@ export const Modal = ({ isOpen, onClose }) => {
   const { name, email } = state;
 
   const handleOkClick = () => {
-    setUser({ name, email, id: "a304959a-76c0-4b34-954a-b38dbf310360" });
+    updateUser({ name, email, id: "a304959a-76c0-4b34-954a-b38dbf310360" });
     onClose();
   };
 

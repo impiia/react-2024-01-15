@@ -5,6 +5,7 @@ import { DishContainer } from "../../components/dish/container";
 import styles from './styles.module.scss';
 
 export const DishPage = () => {
+    console.log("DishPage re-render");
     const dishId = useParams().dishId;
     const { isLoading, data: dish } = useGetDishByIdQuery(dishId);
 

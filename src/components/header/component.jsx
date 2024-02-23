@@ -8,16 +8,16 @@ import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 
 export const Header = () => {
-    const { name, email, setUser } = useContext(UserContext);
+    const { name, email, id, updateUser } = useContext(UserContext);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const isAuthenticated = name !== "" && email !== "";
+    const isAuthenticated = name !== "" && email !== "" && id !== "";
    
     const handleLoginClick = () => {
         setIsModalOpen(true);
     };
 
     const handleLogoutClick = () => {
-        setUser({ name: '', email: '' });
+        updateUser({ name: '', email: '' });
     }
 
     const handleCloseModal = () => {

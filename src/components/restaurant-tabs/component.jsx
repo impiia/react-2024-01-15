@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-key */
 import { NavLink } from 'react-router-dom';
 import { Tab } from '../tab/component';
 
@@ -18,3 +17,5 @@ export const RestaurantTabs = ({restaurants}) => {
         </>
     );
 };
+
+
