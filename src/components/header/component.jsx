@@ -1,5 +1,5 @@
-import { useContext,useState } from 'react';
-import { Button } from '../button/component';
+import { useCallback, useContext,useState } from 'react';
+import { ButtonMemoized } from '../button/component';
 import styles from './styles.module.scss';
 import { UserContext } from '../../contexts/user';
 import { Modal } from '../modal-login-form/component';
@@ -12,17 +12,17 @@ export const Header = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const isAuthenticated = name !== "" && email !== "" && id !== "";
    
-    const handleLoginClick = () => {
+    const handleLoginClick = useCallback(() => {
         setIsModalOpen(true);
-    };
+    },[]);
 
-    const handleLogoutClick = () => {
+    const handleLogoutClick = useCallback(() =>  {
         updateUser({ name: '', email: '' });
-    }
+    },[updateUser]);
 
-    const handleCloseModal = () => {
+    const handleCloseModal = useCallback(() => {
         setIsModalOpen(false);
-    };
+    },[]);
 
     return (
         <header className={styles.root}>
@@ -35,11 +35,11 @@ export const Header = () => {
                     <div>
                         <span style={{ marginRight: "10px" }}>name: {name}</span>
                         <span style={{ marginRight: "10px" }}>e-mail: {email}</span>
-                        <Button className={styles.button} onClick={handleLogoutClick} >Logout</Button>
+                        <ButtonMemoized className={styles.button} onClick={handleLogoutClick} >Logout</ButtonMemoized>
                     </div>
                 ) : (
                     <>
-                        <Button className={styles.button} onClick={handleLoginClick} >Login</Button>
+                        <ButtonMemoized className={styles.button} onClick={handleLoginClick} >Login</ButtonMemoized>
                         <Modal isOpen={isModalOpen} onClose={handleCloseModal} />
                     </>
                 )}

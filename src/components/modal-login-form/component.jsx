@@ -1,7 +1,7 @@
-import { useContext, useEffect, useReducer, useRef } from 'react';
+import { useContext, useEffect, useReducer, useRef, useCallback } from 'react';
 import styles from './styles.module.scss';
 import { createPortal } from 'react-dom';
-import { Button } from '../button/component';
+import { ButtonMemoized } from '../button/component';
 import { UserContext } from '../../contexts/user';
 
 const reducer = (state, action) => {
@@ -36,17 +36,17 @@ export const Modal = ({ isOpen, onClose }) => {
     onClose();
   };
 
-  const handleCancelClick = () => {
+  const handleCancelClick = useCallback(() => {
     onClose();
-  };
+  }, [onClose]);
 
-  const handleNameChange = (event) => {
+  const handleNameChange = useCallback((event) => {
     dispatch({ type: 'change_name', payload: event.target.value });
-  };
+  }, []);
 
-  const handleEmailChange = (event) => {
+  const handleEmailChange = useCallback((event) => {
     dispatch({ type: 'change_email', payload: event.target.value });
-  };
+  }, []);
 
   if (!isOpen) {
     return null;
@@ -87,8 +87,8 @@ export const Modal = ({ isOpen, onClose }) => {
               </label>
             </div>
             <div className={styles.buttons}>
-              <Button className={styles.button} onClick={handleCancelClick}>Отмена</Button>
-              <Button className={styles.button} onClick={handleOkClick}>Ок</Button>
+              <ButtonMemoized className={styles.button} onClick={handleCancelClick}>Отмена</ButtonMemoized>
+              <ButtonMemoized className={styles.button} onClick={handleOkClick}>Ок</ButtonMemoized>
             </div>
           </form>
         </div>

@@ -14,7 +14,7 @@ export const Layout = () => {
                 <Footer />
             </UserProvider>
             <div id="modal-container" />
-            <div id="popover-container" className={styles.popoverContainer} />
+            <div id="popover-container" />
         </div>
     )
 }

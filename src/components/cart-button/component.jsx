@@ -1,35 +1,18 @@
-import { useEffect, useRef, useState } from "react";
-import { Button } from "../button/component";
+import { useEffect, useRef, useState, useCallback } from "react";
+import { ButtonMemoized } from "../button/component";
 import { createPortal } from "react-dom";
 import { CartContainer } from "../cart/container";
 import styles from "./styles.module.scss";
 
 export const CartButton = ({ amount }) => {
-    const [coordinates, setCoordinates] = useState(null);
+    const [isOpen, setIsOpen] = useState(false);
     const buttonRef = useRef();
 
-    const toggleCartPopover = () => {
-        if (coordinates) {
-            setCoordinates(null);
-            return;
-        }
-        const {bottom,right} = buttonRef.current.getBoundingClientRect();
-        setCoordinates({ right: -right, top: bottom });
-    }
-    const popoverContainer = useRef(null);
+    const toggleCartPopover = useCallback(() => {
+       setIsOpen(!isOpen);
+    }, [isOpen]);
 
-    useEffect(() => {
-        const handleResize = () => {
-            if (coordinates) {
-                const { bottom, right } = buttonRef.current.getBoundingClientRect();
-                setCoordinates({ right: -right, top: bottom });
-            }
-        };
-        window.addEventListener("resize", handleResize);
-        return () => {
-            window.removeEventListener("resize", handleResize);
-        };
-    }, [coordinates]); 
+    const popoverContainer = useRef(null);
 
     useEffect(() => {
         popoverContainer.current = document.getElementById("popover-container");
@@ -37,11 +20,11 @@ export const CartButton = ({ amount }) => {
 
     return (
         <div className={styles.root}>
-            <Button rootRef={buttonRef} onClick={toggleCartPopover}>
+            <ButtonMemoized rootRef={buttonRef} onClick={toggleCartPopover}>
                 {amount}
-            </Button>
-            {coordinates && createPortal( 
-                <div style={coordinates} className={styles.popoverContainer}><CartContainer /></div>,  
+            </ButtonMemoized>
+            {isOpen && (amount!==0) && createPortal( 
+                <div className={styles.popoverContainer}><CartContainer /></div>,  
                 popoverContainer.current,
             )}
         </div>

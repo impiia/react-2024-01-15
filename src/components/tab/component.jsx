@@ -1,15 +1,15 @@
-import { Button } from "../button/component";
+import { ButtonMemoized } from "../button/component";
 import styles from './styles.module.scss';
 
 export const Tab = ({ title, disabled}) => {
-
+    
     return (
-        <Button
+        <ButtonMemoized
             className={styles.pageLink}
             disabled={disabled}
         >
             {title}
-        </Button>
+        </ButtonMemoized>
     );
 };
 
